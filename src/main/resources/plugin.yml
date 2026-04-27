@@ -1,0 +1,63 @@
+name: WuMoeMC
+version: 0.1
+main: org.wumoe.mc.WuMoePlugin
+api-version: 1.21
+
+commands:
+  tpa:
+    description: 请求传送自己到对方位置
+    usage: /tpa <NAME>
+  tpahere:
+    description: 请求传送对方到自己位置
+    usage: /tpahere <NAME>
+  tpaccept:
+    description: 同意传送
+    usage: /tpaccept
+  tpdeny:
+    description: 拒绝传送
+    usage: /tpdeny
+  back:
+    description: 回到死亡地点
+    usage: /back
+  sethome:
+    description: 设置家
+    usage: /sethome
+  delhome:
+    description: 删除家
+    usage: /delhome
+  home:
+    description: 回家
+    usage: /home
+  login:
+    description: 登陆
+    usage: /login <密码>
+  register:
+    description: 注册
+    usage: /register <密码> <重复密码>
+  changepassword:
+    description: 更改密码
+    usage: /changepassword <旧密码> <新密码> <重复新密码>
+  kick:
+    description: 踢出
+    usage: /kick <NAME>
+  ban:
+    description: 拉黑
+    usage: /ban <NAME>
+  unban:
+    description: 解除拉黑
+    usage: /unban <NAME>
+  uuid:
+    description: NAME->UUID
+    usage: /uuid <NAME>
+  name:
+    description: UUID->NAME
+    usage: /name <UUID>
+  lookup:
+    description: 查看用户信息
+    usage: /lookup <NAME>
+  chunkload:
+    description: 锁定区块加载
+    usage: |
+      /chunkload on
+      /chunkload off
+      /chunkload check
