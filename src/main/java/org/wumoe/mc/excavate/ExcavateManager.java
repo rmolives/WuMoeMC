@@ -34,10 +34,10 @@ public class ExcavateManager {
                 line instanceof net.kyori.adventure.text.TextComponent tc &&
                         tc.content().contains("批量挖掘"));
         if (enable) {
-            meta.getPersistentDataContainer().set(key, PersistentDataType.BYTE, (byte) 1);
+            meta.getPersistentDataContainer().set(this.key, PersistentDataType.BYTE, (byte) 1);
             lore.add(Component.text("模式: 批量挖掘", NamedTextColor.GREEN));
         } else
-            meta.getPersistentDataContainer().remove(key);
+            meta.getPersistentDataContainer().remove(this.key);
         meta.lore(lore.isEmpty() ? null : lore);
         item.setItemMeta(meta);
     }
