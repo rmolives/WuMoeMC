@@ -1,16 +1,16 @@
-package org.wumoe.mc.tpa.command;
+package org.wumoe.mc.tp.command;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.jspecify.annotations.NonNull;
-import org.wumoe.mc.tpa.TpaManager;
+import org.wumoe.mc.tp.TpaManager;
 
-public class TpDenyCommand implements CommandExecutor {
+public class TpAcceptCommand implements CommandExecutor {
     private final TpaManager manager;
 
-    public TpDenyCommand(TpaManager manager) {
+    public TpAcceptCommand(TpaManager manager) {
         this.manager = manager;
     }
 
@@ -20,7 +20,7 @@ public class TpDenyCommand implements CommandExecutor {
             sender.sendMessage(Component.text("只有玩家可以使用", NamedTextColor.RED));
             return true;
         }
-        this.manager.deny(player);
+        this.manager.accept(player);
         return true;
     }
 }

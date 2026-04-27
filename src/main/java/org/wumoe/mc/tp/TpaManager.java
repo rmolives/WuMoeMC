@@ -1,4 +1,4 @@
-package org.wumoe.mc.tpa;
+package org.wumoe.mc.tp;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -10,8 +10,6 @@ import org.wumoe.mc.player.PlayerManager;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
-import java.util.*;
 
 public class TpaManager {
     private final Map<UUID, TpaRequest> requests = new HashMap<>();

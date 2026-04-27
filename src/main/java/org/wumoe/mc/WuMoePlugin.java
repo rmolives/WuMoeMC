@@ -26,10 +26,10 @@ import org.wumoe.mc.home.command.DelHomeCommand;
 import org.wumoe.mc.home.command.HomeCommand;
 import org.wumoe.mc.home.command.SetHomeCommand;
 import org.wumoe.mc.player.command.LookupCommand;
-import org.wumoe.mc.tpa.command.TpAcceptCommand;
-import org.wumoe.mc.tpa.command.TpaCommand;
-import org.wumoe.mc.tpa.command.TpDenyCommand;
-import org.wumoe.mc.tpa.command.TpahereCommand;
+import org.wumoe.mc.tp.command.TpAcceptCommand;
+import org.wumoe.mc.tp.command.TpaCommand;
+import org.wumoe.mc.tp.command.TpDenyCommand;
+import org.wumoe.mc.tp.command.TpahereCommand;
 
 import java.util.Objects;
 
@@ -53,10 +53,10 @@ public final class WuMoePlugin extends JavaPlugin {
         register("lookup", new LookupCommand(this.manager.playerManager, this.manager.banManager, this.manager.authManager));
         getServer().getPluginManager().registerEvents(new PlayerListener(this.manager.playerManager), this);
         /*-----------------------------------------------*/
-        register("tpa", new TpaCommand(this.manager.tpaManager));
-        register("tpahere", new TpahereCommand(this.manager.tpaManager));
-        register("tpaccept", new TpAcceptCommand(this.manager.tpaManager));
-        register("tpdeny", new TpDenyCommand(this.manager.tpaManager));
+        register("tpa", new TpaCommand(this.manager.tpManager));
+        register("tpahere", new TpahereCommand(this.manager.tpManager));
+        register("tpaccept", new TpAcceptCommand(this.manager.tpManager));
+        register("tpdeny", new TpDenyCommand(this.manager.tpManager));
         /*-----------------------------------------------*/
         register("back", new DeathCommand(this.manager.deathManager));
         getServer().getPluginManager().registerEvents(new DeathListener(this.manager.deathManager), this);

@@ -1,4 +1,4 @@
-package org.wumoe.mc.tpa;
+package org.wumoe.mc.tp;
 
 import java.util.UUID;
 
