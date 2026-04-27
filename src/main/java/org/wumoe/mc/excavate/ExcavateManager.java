@@ -33,10 +33,10 @@ public class ExcavateManager {
         if (lore == null) lore = new ArrayList<>();
         lore.removeIf(line ->
                 line instanceof TextComponent tc &&
-                        tc.content().contains("批量挖掘"));
+                        tc.content().contains("<批量挖掘>"));
         if (enable) {
             meta.getPersistentDataContainer().set(this.key, PersistentDataType.BYTE, (byte) 1);
-            lore.add(Component.text("批量挖掘", NamedTextColor.GREEN));
+            lore.add(Component.text("<批量挖掘>", NamedTextColor.GREEN));
         } else
             meta.getPersistentDataContainer().remove(this.key);
         meta.lore(lore.isEmpty() ? null : lore);
