@@ -28,7 +28,6 @@ public class TpaManager {
     public void sendRequest(Player from, Player to, TpaRequest.Type type) {
         UUID toId = to.getUniqueId();
         requests.put(toId, new TpaRequest(from.getUniqueId(), toId, type));
-
         to.sendMessage(Component.text(from.getName(), NamedTextColor.GREEN)
                 .append(Component.text(" 请求", NamedTextColor.GREEN))
                 .append(Component.text(
