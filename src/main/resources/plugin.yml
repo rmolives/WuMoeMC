@@ -55,6 +55,9 @@ commands:
   lookup:
     description: 查看用户信息
     usage: /lookup <NAME>
+  menu:
+    description: 打开菜单
+    usage: /menu
   chunkload:
     description: 锁定区块加载
     usage: |

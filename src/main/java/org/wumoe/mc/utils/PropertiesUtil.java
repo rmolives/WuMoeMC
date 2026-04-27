@@ -1,6 +1,7 @@
 package org.wumoe.mc.utils;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
@@ -30,7 +31,10 @@ public class PropertiesUtil {
                 file.getParentFile().mkdirs();
                 file.createNewFile();
             }
-            try (InputStream in = new FileInputStream(file)) {
+            try (InputStreamReader in = new InputStreamReader(
+                    new FileInputStream(file),
+                    StandardCharsets.UTF_8
+            )) {
                 properties.load(in);
             }
         } catch (IOException e) {
@@ -39,7 +43,10 @@ public class PropertiesUtil {
     }
 
     public synchronized void save() {
-        try (OutputStream out = new FileOutputStream(file)) {
+        try (OutputStreamWriter out = new OutputStreamWriter(
+                new FileOutputStream(file),
+                StandardCharsets.UTF_8
+        )) {
             properties.store(out, "WuMoe Minecraft Plugin");
         } catch (IOException e) {
             throw new RuntimeException("Failed to save properties file", e);

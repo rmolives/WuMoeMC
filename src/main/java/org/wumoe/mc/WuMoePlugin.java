@@ -13,6 +13,8 @@ import org.wumoe.mc.ban.command.UnbanCommand;
 import org.wumoe.mc.ban.listener.BanListener;
 import org.wumoe.mc.chain.listener.ChainListener;
 import org.wumoe.mc.chunk.command.ChunkLoadCommand;
+import org.wumoe.mc.menu.command.MenuCommand;
+import org.wumoe.mc.menu.listener.MenuListener;
 import org.wumoe.mc.player.command.NameCommand;
 import org.wumoe.mc.player.command.UUIDCommand;
 import org.wumoe.mc.player.listener.PlayerListener;
@@ -35,6 +37,9 @@ public final class WuMoePlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         this.manager = new WuMoeManager(this);
+        /*-----------------------------------------------*/
+        register("menu", new MenuCommand(this.manager.menuManager));
+        getServer().getPluginManager().registerEvents(new MenuListener(this.manager.menuManager), this);
         /*-----------------------------------------------*/
         register("chunkload", new ChunkLoadCommand(this.manager.chunkLoadManager));
         this.manager.chunkLoadManager.loadAll();

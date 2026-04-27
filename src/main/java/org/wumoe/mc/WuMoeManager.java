@@ -4,11 +4,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.wumoe.mc.auth.AuthManager;
 import org.wumoe.mc.ban.BanManager;
 import org.wumoe.mc.chunk.ChunkLoadManager;
+import org.wumoe.mc.menu.MenuManager;
 import org.wumoe.mc.player.PlayerManager;
 import org.wumoe.mc.death.DeathManager;
 import org.wumoe.mc.home.HomeManager;
 import org.wumoe.mc.tpa.TpaManager;
 import org.wumoe.mc.utils.PropertiesUtil;
+import org.wumoe.mc.utils.YamlUtil;
 
 public class WuMoeManager {
     public JavaPlugin plugin;
@@ -19,6 +21,7 @@ public class WuMoeManager {
     public BanManager banManager;
     public PlayerManager playerManager;
     public ChunkLoadManager chunkLoadManager;
+    public MenuManager menuManager;
 
     public WuMoeManager(JavaPlugin plugin) {
         this.plugin = plugin;
@@ -33,5 +36,6 @@ public class WuMoeManager {
         this.tpaManager = new TpaManager(this.playerManager, plugin);
         this.banManager = new BanManager(new PropertiesUtil(plugin.getDataFolder() + "/bans.properties"), this.playerManager);
         this.chunkLoadManager = new ChunkLoadManager(this.plugin, new PropertiesUtil(plugin.getDataFolder() + "/chunk_load.properties"));
+        this.menuManager = new MenuManager(new YamlUtil(plugin.getDataFolder() + "/menu.yaml"));
     }
 }
