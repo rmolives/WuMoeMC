@@ -41,8 +41,7 @@ public final class WuMoePlugin extends JavaPlugin {
         register("menu", new MenuCommand(this.manager.menuManager));
         getServer().getPluginManager().registerEvents(new MenuListener(this.manager.menuManager), this);
         /*-----------------------------------------------*/
-        register("chunkload", new ChunkLoadCommand(this.manager.chunkLoadManager));
-        this.manager.chunkLoadManager.loadAll();
+        register("chunkload", new ChunkLoadCommand());
         /*-----------------------------------------------*/
         register("uuid", new UUIDCommand(this.manager.playerManager));
         register("name", new NameCommand(this.manager.playerManager));
@@ -77,9 +76,7 @@ public final class WuMoePlugin extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        Bukkit.getOnlinePlayers().forEach(player -> {
-            this.manager.playerManager.onQuit(player);
-        });
+        Bukkit.getOnlinePlayers().forEach(player -> this.manager.playerManager.onQuit(player));
     }
 
     private void register(String name, CommandExecutor executor) {

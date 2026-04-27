@@ -4,15 +4,8 @@ import org.bukkit.Chunk;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.jspecify.annotations.NonNull;
-import org.wumoe.mc.chunk.ChunkLoadManager;
 
 public class ChunkLoadCommand implements CommandExecutor {
-    private final ChunkLoadManager manager;
-
-    public ChunkLoadCommand(ChunkLoadManager manager) {
-        this.manager = manager;
-    }
-
     @Override
     public boolean onCommand(@NonNull CommandSender sender, @NonNull Command cmd, @NonNull String label, String @NonNull [] args) {
         if (!(sender instanceof Player player)) {
@@ -23,11 +16,11 @@ public class ChunkLoadCommand implements CommandExecutor {
         Chunk chunk = player.getLocation().getChunk();
         switch (args[0].toLowerCase()) {
             case "on" -> {
-                manager.add(chunk);
+                chunk.setForceLoaded(true);
                 player.sendMessage("§a已锁定区块加载");
             }
             case "off" -> {
-                manager.remove(chunk);
+                chunk.setForceLoaded(false);
                 player.sendMessage("§e已取消区块加载");
             }
             case "check" -> {
