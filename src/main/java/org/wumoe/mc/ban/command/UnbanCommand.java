@@ -1,5 +1,7 @@
 package org.wumoe.mc.ban.command;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.jspecify.annotations.NonNull;
@@ -24,15 +26,15 @@ public class UnbanCommand implements CommandExecutor {
         String name = args[0];
         UUID uuid = this.manager.player.getUUID(name);
         if (uuid == null) {
-            sender.sendMessage("§c该玩家从未加入过服务器！");
+            sender.sendMessage(Component.text("该玩家从未加入过服务器！", NamedTextColor.RED));
             return true;
         }
         if (!this.manager.isBanned(uuid)) {
-            sender.sendMessage("§c该玩家没有被封禁！");
+            sender.sendMessage(Component.text("该玩家没有被封禁！", NamedTextColor.RED));
             return true;
         }
         this.manager.unban(uuid);
-        sender.sendMessage("§a已解封玩家 " + name);
+        sender.sendMessage(Component.text("已解封玩家 " + name, NamedTextColor.GREEN));
         return true;
     }
 }

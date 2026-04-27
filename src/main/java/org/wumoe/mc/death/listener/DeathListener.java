@@ -1,5 +1,7 @@
 package org.wumoe.mc.death.listener;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,6 +19,9 @@ public class DeathListener implements Listener {
     public void onDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
         this.manager.recordDeath(player);
-        player.sendMessage("§e你死亡了，输入 §a/back §e返回死亡地点");
+        player.sendMessage(
+                Component.text("你死亡了，输入 ", NamedTextColor.YELLOW)
+                        .append(Component.text("/back", NamedTextColor.GREEN))
+                        .append(Component.text(" 返回死亡地点", NamedTextColor.YELLOW)));
     }
 }

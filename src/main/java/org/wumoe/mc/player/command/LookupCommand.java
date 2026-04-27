@@ -1,5 +1,7 @@
 package org.wumoe.mc.player.command;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
@@ -34,30 +36,59 @@ public class LookupCommand implements CommandExecutor {
         String name = args[0];
         UUID uuid = this.playerManager.getUUID(name);
         if (uuid == null) {
-            sender.sendMessage("§c未找到该玩家记录！");
+            sender.sendMessage(Component.text("未找到该玩家记录！", NamedTextColor.RED));
             return true;
         }
         Player online = Bukkit.getPlayer(uuid);
         boolean banned = this.banManager.isBanned(uuid);
         boolean loggedIn = this.authManager.isLoggedIn(uuid);
         boolean isOnline = online != null;
-        sender.sendMessage("§e===== 玩家信息 =====");
-        sender.sendMessage("§aName: §f" + name);
-        sender.sendMessage("§aUUID: §f" + uuid);
-        sender.sendMessage("§aIP: §f" + this.playerManager.getIP(uuid));
-        sender.sendMessage("§aOP权限: " + (Bukkit.getOfflinePlayer(uuid).isOp() ? "§c是OP" : "§7不是OP"));
-        sender.sendMessage("§a在线状态: " + (isOnline ? "§a在线" : "§7离线"));
-        sender.sendMessage("§a登录状态: " + (loggedIn ? "§a已登录" : "§c未登录"));
-        sender.sendMessage("§a首次加入: §f" + time(this.playerManager.getFirstJoin(uuid)));
-        sender.sendMessage("§a注册时间: §f" + time(this.authManager.getRegisterTime(uuid)));
-        sender.sendMessage("§a最后加入: §f" + time(this.playerManager.getLastJoin(uuid)));
-        sender.sendMessage("§a最后离线: §f" + time(this.playerManager.getLastQuit(uuid)));
+        sender.sendMessage(Component.text("===== 玩家信息 =====", NamedTextColor.YELLOW));
+        sender.sendMessage(
+                Component.text("Name: ", NamedTextColor.GREEN)
+                        .append(Component.text(name, NamedTextColor.WHITE)));
+        sender.sendMessage(
+                Component.text("UUID: ", NamedTextColor.GREEN)
+                        .append(Component.text(uuid.toString(), NamedTextColor.WHITE)));
+        sender.sendMessage(
+                Component.text("IP: ", NamedTextColor.GREEN)
+                        .append(Component.text(this.playerManager.getIP(uuid), NamedTextColor.WHITE)));
+        sender.sendMessage(
+                Component.text("OP权限: ", NamedTextColor.GREEN)
+                        .append(Component.text(
+                                Bukkit.getOfflinePlayer(uuid).isOp() ? "是OP" : "不是OP",
+                                Bukkit.getOfflinePlayer(uuid).isOp() ? NamedTextColor.RED : NamedTextColor.GRAY)));
+        sender.sendMessage(
+                Component.text("在线状态: ", NamedTextColor.GREEN)
+                        .append(Component.text(isOnline ? "在线" : "离线",
+                                isOnline ? NamedTextColor.GREEN : NamedTextColor.GRAY)));
+        sender.sendMessage(
+                Component.text("登录状态: ", NamedTextColor.GREEN)
+                        .append(Component.text(loggedIn ? "已登录" : "未登录",
+                                loggedIn ? NamedTextColor.GREEN : NamedTextColor.RED)));
+        sender.sendMessage(
+                Component.text("首次加入: ", NamedTextColor.GREEN)
+                        .append(Component.text(time(this.playerManager.getFirstJoin(uuid)), NamedTextColor.WHITE)));
+        sender.sendMessage(
+                Component.text("注册时间: ", NamedTextColor.GREEN)
+                        .append(Component.text(time(this.authManager.getRegisterTime(uuid)), NamedTextColor.WHITE)));
+        sender.sendMessage(
+                Component.text("最后加入: ", NamedTextColor.GREEN)
+                        .append(Component.text(time(this.playerManager.getLastJoin(uuid)), NamedTextColor.WHITE)));
+        sender.sendMessage(
+                Component.text("最后离线: ", NamedTextColor.GREEN)
+                        .append(Component.text(time(this.playerManager.getLastQuit(uuid)), NamedTextColor.WHITE)));
         if (banned) {
-            sender.sendMessage("§c封禁状态: 已封禁");
-            sender.sendMessage("§c封禁原因: §f" + this.banManager.getReason(uuid));
-            sender.sendMessage("§c封禁时间: §f" + time(this.banManager.getBanTime(uuid)));
+            sender.sendMessage(Component.text("封禁状态: 已封禁", NamedTextColor.RED));
+            sender.sendMessage(
+                    Component.text("封禁原因: ", NamedTextColor.RED)
+                            .append(Component.text(this.banManager.getReason(uuid), NamedTextColor.WHITE)));
+            sender.sendMessage(
+                    Component.text("封禁时间: ", NamedTextColor.RED)
+                            .append(Component.text(time(this.banManager.getBanTime(uuid)), NamedTextColor.WHITE)));
         } else
-            sender.sendMessage("§a封禁状态: 正常");
+            sender.sendMessage(
+                    Component.text("封禁状态: 正常", NamedTextColor.GREEN));
         return true;
     }
 

@@ -1,6 +1,7 @@
 package org.wumoe.mc.ban.command;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
@@ -31,8 +32,11 @@ public class BanCommand implements CommandExecutor {
         this.manager.ban(uuid, reason);
         Player online = Bukkit.getPlayer(uuid);
         if (online != null)
-            online.kick(Component.text("§c你已被封禁！\n§7原因: " + reason));
-        sender.sendMessage("§a已封禁玩家 " + name);
+            online.kick(
+                    Component.text("你已被封禁！", NamedTextColor.RED)
+                            .append(Component.newline())
+                            .append(Component.text("原因: " + reason, NamedTextColor.GRAY)));
+        sender.sendMessage(Component.text("已封禁玩家 " + name, NamedTextColor.GREEN));
         return true;
     }
 }

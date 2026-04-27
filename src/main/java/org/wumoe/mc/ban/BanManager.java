@@ -1,6 +1,7 @@
 package org.wumoe.mc.ban;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.entity.Player;
 import org.wumoe.mc.player.PlayerManager;
 import org.wumoe.mc.utils.PropertiesUtil;
@@ -46,6 +47,11 @@ public class BanManager {
     public void kickIfBanned(Player player) {
         UUID uuid = player.getUniqueId();
         if (isBanned(uuid))
-            player.kick(Component.text("§c你已被封禁！\n§7原因: " + getReason(uuid)));
+            player.kick(
+                    Component.text("你已被封禁！", NamedTextColor.RED)
+                            .append(Component.newline())
+                            .append(Component.text("原因: ", NamedTextColor.GRAY))
+                            .append(Component.text(getReason(uuid), NamedTextColor.WHITE))
+            );
     }
 }

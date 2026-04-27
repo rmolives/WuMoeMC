@@ -1,5 +1,7 @@
 package org.wumoe.mc.tpa.command;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
@@ -19,7 +21,7 @@ public class TpahereCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NonNull CommandSender sender, @NonNull Command cmd, @NonNull String label, String @NonNull [] args) {
         if (!(sender instanceof Player player)) {
-            sender.sendMessage("只有玩家可以使用");
+            sender.sendMessage(Component.text("只有玩家可以使用", NamedTextColor.RED));
             return true;
         }
         if (args.length != 1) return false;
@@ -30,12 +32,12 @@ public class TpahereCommand implements CommandExecutor {
         }
         Player target = Bukkit.getPlayer(uuid);
         if (target != null && target.equals(player)) {
-            player.sendMessage("§c不能对自己发送请求");
+            player.sendMessage(Component.text("不能对自己发送请求", NamedTextColor.RED));
             return true;
         }
         if (target != null) {
             this.manager.sendRequest(player, target, TpaRequest.Type.TPAHERE);
-            player.sendMessage("§a已请求 " + target.getName() + " 传送到你这里");
+            player.sendMessage(Component.text("已请求 " + target.getName() + " 传送到你这里", NamedTextColor.GREEN));
         }
         return true;
     }

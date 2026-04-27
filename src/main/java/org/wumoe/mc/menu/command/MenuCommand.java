@@ -1,5 +1,7 @@
 package org.wumoe.mc.menu.command;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.jspecify.annotations.NonNull;
@@ -15,7 +17,7 @@ public class MenuCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NonNull CommandSender sender, @NonNull Command cmd, @NonNull String label, String @NonNull [] args) {
         if (!(sender instanceof Player player)) {
-            sender.sendMessage("§c只有玩家可以使用");
+            sender.sendMessage(Component.text("只有玩家可以使用", NamedTextColor.RED));
             return true;
         }
         this.manager.open(player, "main");

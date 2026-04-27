@@ -1,5 +1,7 @@
 package org.wumoe.mc.auth.command;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.jspecify.annotations.NonNull;
@@ -15,24 +17,24 @@ public class RegisterCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NonNull CommandSender sender, @NonNull Command command, @NonNull String label, String @NonNull [] args) {
         if (!(sender instanceof Player player)) {
-            sender.sendMessage("只有玩家可以使用");
+            sender.sendMessage(Component.text("只有玩家可以使用", NamedTextColor.RED));
             return true;
         }
         if (args.length != 2) return false;
         if (this.manager.isRegistered(player)) {
-            player.sendMessage("§c你已经注册过了！");
+            player.sendMessage(Component.text("你已经注册过了！", NamedTextColor.RED));
             return true;
         }
         if (!args[0].equals(args[1])) {
-            player.sendMessage("§c两次输入的密码不一样！");
+            player.sendMessage(Component.text("两次输入的密码不一样！", NamedTextColor.RED));
             return true;
         }
         if (args[0].length() < 6) {
-            player.sendMessage("§c密码至少6位！");
+            player.sendMessage(Component.text("密码至少6位！", NamedTextColor.RED));
             return true;
         }
         this.manager.register(player, args[0]);
-        player.sendMessage("§a注册成功");
+        player.sendMessage(Component.text("注册成功", NamedTextColor.GREEN));
         this.manager.login(player, args[0]);
         return true;
     }

@@ -1,6 +1,7 @@
 package org.wumoe.mc.ban.command;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
@@ -26,12 +27,15 @@ public class KickCommand implements CommandExecutor {
         UUID uuid = this.manager.player.getUUID(args[0]);
         Player target = Bukkit.getPlayer(uuid);
         if (target == null) {
-            sender.sendMessage("§c玩家不存在！");
+            sender.sendMessage(Component.text("玩家不存在！", NamedTextColor.RED));
             return true;
         }
         String reason = args.length >= 2 ? String.join(" ", args).substring(args[0].length()).trim() : "Kicked";
-        target.kick(Component.text("§c你被踢出服务器！\n§7原因: " + reason));
-        sender.sendMessage("§a已踢出玩家 " + target.getName());
+        target.kick(
+                Component.text("你被踢出服务器！", NamedTextColor.RED)
+                        .append(Component.newline())
+                        .append(Component.text("原因: " + reason, NamedTextColor.GRAY)));
+        sender.sendMessage(Component.text("已踢出玩家 " + target.getName(), NamedTextColor.GREEN));
         return true;
     }
 }

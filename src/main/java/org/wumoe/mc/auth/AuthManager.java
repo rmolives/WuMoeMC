@@ -1,6 +1,7 @@
 package org.wumoe.mc.auth;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -39,8 +40,8 @@ public class AuthManager {
                 if (timeLeft <= 0) return;
                 player.showTitle(
                         Title.title(
-                                Component.text("§c请登录"),
-                                Component.text("§e剩余 " + timeLeft + " 秒"),
+                                Component.text("请登录", NamedTextColor.RED),
+                                Component.text("剩余 " + timeLeft + " 秒", NamedTextColor.YELLOW),
                                 Title.Times.times(
                                         Duration.ZERO,
                                         Duration.ofSeconds(1),
@@ -111,9 +112,9 @@ public class AuthManager {
     public void wait(Player player) {
         logout(player);
         if (!isRegistered(player))
-            player.sendMessage("§e请使用 /register <密码> <重复密码> 注册");
+            player.sendMessage(Component.text("请使用 /register <密码> <重复密码> 注册", NamedTextColor.YELLOW));
         else
-            player.sendMessage("§e请使用 /login <密码> 登录");
+            player.sendMessage(Component.text("请使用 /login <密码> 登录", NamedTextColor.YELLOW));
         startLoginTimeout(player);
     }
 

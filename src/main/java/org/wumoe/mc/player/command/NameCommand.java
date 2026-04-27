@@ -1,5 +1,7 @@
 package org.wumoe.mc.player.command;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.command.*;
 import org.jspecify.annotations.NonNull;
 import org.wumoe.mc.player.PlayerManager;
@@ -21,14 +23,18 @@ public class NameCommand implements CommandExecutor {
             UUID uuid = UUID.fromString(args[0]);
             String name = this.manager.getName(uuid);
             if (name == null) {
-                sender.sendMessage("§c未找到该 UUID 对应玩家！");
+                sender.sendMessage(Component.text("未找到该 UUID 对应玩家！", NamedTextColor.RED));
                 return true;
             }
-            sender.sendMessage("§e玩家信息:");
-            sender.sendMessage("§aName: §f" + name);
-            sender.sendMessage("§aUUID: §f" + args[0]);
+            sender.sendMessage(Component.text("玩家信息:", NamedTextColor.YELLOW));
+            sender.sendMessage(
+                    Component.text("Name: ", NamedTextColor.GREEN)
+                            .append(Component.text(name, NamedTextColor.WHITE)));
+            sender.sendMessage(
+                    Component.text("UUID: ", NamedTextColor.GREEN)
+                            .append(Component.text(args[0], NamedTextColor.WHITE)));
         } catch (IllegalArgumentException e) {
-            sender.sendMessage("§cUUID格式错误！");
+            sender.sendMessage(Component.text("UUID格式错误！", NamedTextColor.RED));
         }
         return true;
     }

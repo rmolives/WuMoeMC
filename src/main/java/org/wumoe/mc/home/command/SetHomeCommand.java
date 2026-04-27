@@ -1,5 +1,7 @@
 package org.wumoe.mc.home.command;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -17,11 +19,11 @@ public class SetHomeCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NonNull CommandSender sender, @NonNull Command command, @NonNull String label, String @NonNull [] args) {
         if (!(sender instanceof Player player)) {
-            sender.sendMessage("只有玩家可以使用");
+            sender.sendMessage(Component.text("只有玩家可以使用", NamedTextColor.RED));
             return true;
         }
         this.manager.setHome(player);
-        player.sendMessage("§aHome设置成功！");
+        player.sendMessage(Component.text("Home设置成功！", NamedTextColor.GREEN));
         return true;
     }
 }
