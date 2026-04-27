@@ -58,6 +58,11 @@ commands:
   menu:
     description: 打开菜单
     usage: /menu
+  excavate:
+    description: 给当前物品添加批量挖掘
+    usage: |
+      /excavate on
+      /excavate off
   chunkload:
     description: 锁定区块加载
     usage: |
