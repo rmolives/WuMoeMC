@@ -16,7 +16,7 @@ public class ExcavateCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NonNull CommandSender sender, @NonNull Command cmd, @NonNull String label, String @NonNull [] args) {
         if (!(sender instanceof Player player)) {
-            sender.sendMessage("只能玩家执行");
+            sender.sendMessage("§c只有玩家可以使用");
             return true;
         }
         if (args.length == 0) return false;
