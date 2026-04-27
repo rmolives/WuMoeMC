@@ -2,7 +2,7 @@ package org.wumoe.mc.tp;
 
 import java.util.UUID;
 
-public class TpaRequest {
+public class TpRequest {
     public enum Type {
         TPA,
         TPAHERE
@@ -13,7 +13,7 @@ public class TpaRequest {
     public final Type type;
     public final long time;
 
-    public TpaRequest(UUID from, UUID to, Type type) {
+    public TpRequest(UUID from, UUID to, Type type) {
         this.from = from;
         this.to = to;
         this.type = type;

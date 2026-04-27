@@ -6,15 +6,15 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.jspecify.annotations.NonNull;
-import org.wumoe.mc.tp.TpaManager;
-import org.wumoe.mc.tp.TpaRequest;
+import org.wumoe.mc.tp.TpManager;
+import org.wumoe.mc.tp.TpRequest;
 
 import java.util.UUID;
 
 public class TpaCommand implements CommandExecutor {
-    private final TpaManager manager;
+    private final TpManager manager;
 
-    public TpaCommand(TpaManager manager) {
+    public TpaCommand(TpManager manager) {
         this.manager = manager;
     }
 
@@ -36,7 +36,7 @@ public class TpaCommand implements CommandExecutor {
             return true;
         }
         if (target != null) {
-            this.manager.sendRequest(player, target, TpaRequest.Type.TPA);
+            this.manager.sendRequest(player, target, TpRequest.Type.TPA);
             player.sendMessage(Component.text("已请求传送到 " + target.getName() + " 那里", NamedTextColor.GREEN));
         }
         return true;

@@ -5,12 +5,12 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.jspecify.annotations.NonNull;
-import org.wumoe.mc.tp.TpaManager;
+import org.wumoe.mc.tp.TpManager;
 
 public class TpAcceptCommand implements CommandExecutor {
-    private final TpaManager manager;
+    private final TpManager manager;
 
-    public TpAcceptCommand(TpaManager manager) {
+    public TpAcceptCommand(TpManager manager) {
         this.manager = manager;
     }
 

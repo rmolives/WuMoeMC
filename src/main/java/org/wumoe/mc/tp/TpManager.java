@@ -11,29 +11,29 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class TpaManager {
-    private final Map<UUID, TpaRequest> requests = new HashMap<>();
+public class TpManager {
+    private final Map<UUID, TpRequest> requests = new HashMap<>();
     private final JavaPlugin plugin;
     public final PlayerManager player;
 
     private final long expireTime = 30 * 1000L;
 
-    public TpaManager(PlayerManager player, JavaPlugin plugin) {
+    public TpManager(PlayerManager player, JavaPlugin plugin) {
         this.player = player;
         this.plugin = plugin;
     }
 
-    public void sendRequest(Player from, Player to, TpaRequest.Type type) {
+    public void sendRequest(Player from, Player to, TpRequest.Type type) {
         UUID toId = to.getUniqueId();
-        requests.put(toId, new TpaRequest(from.getUniqueId(), toId, type));
+        requests.put(toId, new TpRequest(from.getUniqueId(), toId, type));
         to.sendMessage(Component.text(from.getName(), NamedTextColor.GREEN)
                 .append(Component.text(" 请求", NamedTextColor.GREEN))
                 .append(Component.text(
-                        type == TpaRequest.Type.TPA ? "传送到你这里" : "让你传送过去",
+                        type == TpRequest.Type.TPA ? "传送到你这里" : "让你传送过去",
                         NamedTextColor.WHITE)));
         to.sendMessage(Component.text("输入 /tpaccept 或 /tpdeny", NamedTextColor.YELLOW));
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
-            TpaRequest req = requests.get(toId);
+            TpRequest req = requests.get(toId);
             if (req != null && System.currentTimeMillis() - req.time >= expireTime) {
                 requests.remove(toId);
                 Player target = Bukkit.getPlayer(toId);
@@ -44,7 +44,7 @@ public class TpaManager {
     }
 
     public void accept(Player target) {
-        TpaRequest req = requests.remove(target.getUniqueId());
+        TpRequest req = requests.remove(target.getUniqueId());
         if (req == null) {
             target.sendMessage(Component.text("没有待处理请求", NamedTextColor.RED));
             return;
@@ -54,7 +54,7 @@ public class TpaManager {
             target.sendMessage(Component.text("请求玩家已离线", NamedTextColor.RED));
             return;
         }
-        if (req.type == TpaRequest.Type.TPA)
+        if (req.type == TpRequest.Type.TPA)
             from.teleport(target.getLocation());
         else
             target.teleport(from.getLocation());
@@ -63,7 +63,7 @@ public class TpaManager {
     }
 
     public void deny(Player target) {
-        TpaRequest req = requests.remove(target.getUniqueId());
+        TpRequest req = requests.remove(target.getUniqueId());
         if (req == null) {
             target.sendMessage(Component.text("没有待处理请求", NamedTextColor.RED));
             return;
