@@ -15,7 +15,7 @@ public class YamlUtil {
     }
 
     public YamlConfiguration get() {
-        return config;
+        return this.config;
     }
 
     public void reload() {
@@ -24,7 +24,7 @@ public class YamlUtil {
 
     public void save() {
         try {
-            config.save(file);
+            this.config.save(this.file);
         } catch (IOException e) {
             throw new RuntimeException("Failed to save yaml file", e);
         }
