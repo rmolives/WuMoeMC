@@ -1,6 +1,7 @@
 package org.wumoe.mc.excavate;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -31,7 +32,7 @@ public class ExcavateManager {
         List<Component> lore = meta.lore();
         if (lore == null) lore = new ArrayList<>();
         lore.removeIf(line ->
-                line instanceof net.kyori.adventure.text.TextComponent tc &&
+                line instanceof TextComponent tc &&
                         tc.content().contains("批量挖掘"));
         if (enable) {
             meta.getPersistentDataContainer().set(this.key, PersistentDataType.BYTE, (byte) 1);
