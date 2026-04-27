@@ -45,10 +45,7 @@ public class AuthManager {
                                 Title.Times.times(
                                         Duration.ZERO,
                                         Duration.ofSeconds(1),
-                                        Duration.ZERO
-                                )
-                        )
-                );
+                                        Duration.ZERO)));
                 --timeLeft;
             }
         }, 0L, 20L);
