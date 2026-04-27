@@ -25,7 +25,7 @@ public class DelHomeCommand implements CommandExecutor {
             player.sendMessage("§c你还没有设置家！");
             return true;
         }
-        player.sendMessage("§aHome 已删除！");
+        player.sendMessage("§aHome已删除！");
         return true;
     }
 }

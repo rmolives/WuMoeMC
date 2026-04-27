@@ -21,7 +21,7 @@ public class SetHomeCommand implements CommandExecutor {
             return true;
         }
         this.manager.setHome(player);
-        player.sendMessage("§aHome 设置成功！");
+        player.sendMessage("§aHome设置成功！");
         return true;
     }
 }

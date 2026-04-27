@@ -55,7 +55,7 @@ public class TpaManager {
             from.teleport(target.getLocation());
         else
             target.teleport(from.getLocation());
-        from.sendMessage("§aTPA成功");
+        from.sendMessage("§aTP成功");
         target.sendMessage("§a已接受请求");
     }
 

@@ -27,7 +27,7 @@ public class HomeCommand implements CommandExecutor {
         }
         Location home = this.manager.getHome(player);
         if (home == null) {
-            player.sendMessage("§cHome 数据损坏！");
+            player.sendMessage("§cHome数据损坏！");
             return true;
         }
         player.teleport(home);

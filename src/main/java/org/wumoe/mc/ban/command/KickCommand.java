@@ -1,5 +1,6 @@
 package org.wumoe.mc.ban.command;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
@@ -29,7 +30,7 @@ public class KickCommand implements CommandExecutor {
             return true;
         }
         String reason = args.length >= 2 ? String.join(" ", args).substring(args[0].length()).trim() : "Kicked";
-        target.kickPlayer("§c你被踢出服务器！\n§7原因: " + reason);
+        target.kick(Component.text("§c你被踢出服务器！\n§7原因: " + reason));
         sender.sendMessage("§a已踢出玩家 " + target.getName());
         return true;
     }

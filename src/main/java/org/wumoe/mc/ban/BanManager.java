@@ -17,6 +17,7 @@ public class BanManager {
     }
 
     public void ban(UUID uuid, String reason) {
+        this.config.set("ban." + uuid, "true");
         this.config.set("ban." + uuid + ".reason", reason);
         this.config.set("ban." + uuid + ".time", String.valueOf(System.currentTimeMillis()));
         this.config.save();
@@ -24,6 +25,8 @@ public class BanManager {
 
     public void unban(UUID uuid) {
         this.config.remove("ban." + uuid);
+        this.config.remove("ban." + uuid + ".reason");
+        this.config.remove("ban." + uuid + ".time");
         this.config.save();
     }
 

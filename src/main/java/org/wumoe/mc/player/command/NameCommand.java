@@ -28,7 +28,7 @@ public class NameCommand implements CommandExecutor {
             sender.sendMessage("§aName: §f" + name);
             sender.sendMessage("§aUUID: §f" + args[0]);
         } catch (IllegalArgumentException e) {
-            sender.sendMessage("§cUUID 格式错误！");
+            sender.sendMessage("§cUUID格式错误！");
         }
         return true;
     }

@@ -37,7 +37,6 @@ public class ChunkLoadCommand implements CommandExecutor {
                 player.sendMessage("§7强加载: " + (force ? "§a是" : "§c否"));
             }
             default -> {
-                player.sendMessage("§c用法: /chunkload on|off");
                 return false;
             }
         }
