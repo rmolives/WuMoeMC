@@ -20,7 +20,7 @@ import org.wumoe.mc.menu.listener.MenuListener;
 import org.wumoe.mc.player.command.NameCommand;
 import org.wumoe.mc.player.command.UUIDCommand;
 import org.wumoe.mc.player.listener.PlayerListener;
-import org.wumoe.mc.death.command.BackCommand;
+import org.wumoe.mc.death.command.DeathCommand;
 import org.wumoe.mc.death.listener.DeathListener;
 import org.wumoe.mc.home.command.DelHomeCommand;
 import org.wumoe.mc.home.command.HomeCommand;
@@ -58,7 +58,7 @@ public final class WuMoePlugin extends JavaPlugin {
         register("tpaccept", new TpAcceptCommand(this.manager.tpaManager));
         register("tpdeny", new TpDenyCommand(this.manager.tpaManager));
         /*-----------------------------------------------*/
-        register("back", new BackCommand(this.manager.deathManager));
+        register("back", new DeathCommand(this.manager.deathManager));
         getServer().getPluginManager().registerEvents(new DeathListener(this.manager.deathManager), this);
         /*-----------------------------------------------*/
         register("home", new HomeCommand(this.manager.homeManager));

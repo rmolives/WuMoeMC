@@ -8,8 +8,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 
 public class ChainListener implements Listener {
-    @EventHandler
-    public void onBlockBreak(BlockBreakEvent event) {
+    @EventHandler(ignoreCancelled = true)
+    public void onBreak(BlockBreakEvent event) {
         chainMine(event.getBlock(), event.getBlock().getType(), event.getPlayer());
     }
 

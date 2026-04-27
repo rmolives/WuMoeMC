@@ -6,10 +6,10 @@ import org.bukkit.entity.Player;
 import org.jspecify.annotations.NonNull;
 import org.wumoe.mc.death.DeathManager;
 
-public class BackCommand implements CommandExecutor {
+public class DeathCommand implements CommandExecutor {
     private final DeathManager manager;
 
-    public BackCommand(DeathManager manager) {
+    public DeathCommand(DeathManager manager) {
         this.manager = manager;
     }
 

@@ -17,14 +17,12 @@ public class DeathManager {
 
     public void recordDeath(Player player) {
         Location loc = player.getLocation();
-
         String value = loc.getWorld().getName() + "," +
                 loc.getX() + "," +
                 loc.getY() + "," +
                 loc.getZ() + "," +
                 loc.getYaw() + "," +
                 loc.getPitch();
-
         config.set("death." + player.getUniqueId(), value);
         config.save();
     }
