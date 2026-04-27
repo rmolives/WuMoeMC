@@ -30,12 +30,15 @@ public class BanCommand implements CommandExecutor {
                 ? String.join(" ", args).substring(name.length()).trim()
                 : "Banned";
         this.manager.ban(uuid, reason);
-        Player online = Bukkit.getPlayer(uuid);
-        if (online != null)
-            online.kick(
-                    Component.text("你已被封禁！", NamedTextColor.RED)
-                            .append(Component.newline())
-                            .append(Component.text("原因: " + reason, NamedTextColor.GRAY)));
+        Player target = Bukkit.getPlayer(uuid);
+        if (target == null) {
+            sender.sendMessage(Component.text("玩家不存在！", NamedTextColor.RED));
+            return true;
+        }
+        target.kick(
+                Component.text("你已被封禁！", NamedTextColor.RED)
+                        .append(Component.newline())
+                        .append(Component.text("原因: " + reason, NamedTextColor.GRAY)));
         sender.sendMessage(Component.text("已封禁玩家 " + name, NamedTextColor.GREEN));
         return true;
     }
