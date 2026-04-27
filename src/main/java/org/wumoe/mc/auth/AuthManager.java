@@ -55,7 +55,7 @@ public class AuthManager {
         this.titleTasks.put(uuid, titleTask);
         BukkitTask kickTask = Bukkit.getScheduler().runTaskLater(plugin, () -> {
             if (!isLoggedIn(uuid))
-                player.kick(Component.text("§c登录超时！"));
+                player.kick(Component.text("登录超时！", NamedTextColor.RED));
         }, timeoutSeconds * 20L);
         this.kickTasks.put(uuid, kickTask);
     }
@@ -79,13 +79,12 @@ public class AuthManager {
         return isLoggedIn(player.getUniqueId());
     }
 
-    public boolean register(Player player, String password) {
-        if (isRegistered(player)) return false;
+    public void register(Player player, String password) {
+        if (isRegistered(player)) return;
         this.config.set("auth." + player.getUniqueId(), hash(password));
         this.config.set("auth." + player.getUniqueId() + ".register_time",
                 String.valueOf(System.currentTimeMillis()));
         this.config.save();
-        return true;
     }
 
     public boolean changePassword(Player player, String oldPassword, String newPassword) {

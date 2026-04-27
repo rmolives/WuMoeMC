@@ -1,5 +1,7 @@
 package org.wumoe.mc.menu.listener;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.*;
@@ -44,7 +46,7 @@ public class MenuListener implements Listener {
         if (cmd.toLowerCase().startsWith("menu:")) {
             String target = cmd.substring(5).trim();
             if (target.isEmpty()) {
-                player.sendMessage("§c菜单不存在");
+                player.sendMessage(Component.text("菜单不存在", NamedTextColor.RED));
                 return;
             }
             player.closeInventory();
