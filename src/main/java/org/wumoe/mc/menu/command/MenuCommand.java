@@ -20,8 +20,9 @@ public class MenuCommand implements CommandExecutor {
             if ("reload".equals(args[0])) {
                 this.manager.reload();
                 sender.sendMessage(Component.text("已刷新菜单", NamedTextColor.GREEN));
-            } else
-                return false;
+                return true;
+            }
+            return false;
         }
         if (!(sender instanceof Player player)) {
             sender.sendMessage(Component.text("只有玩家可以使用", NamedTextColor.RED));
