@@ -47,8 +47,7 @@ public class MenuListener implements Listener {
         player.closeInventory();
         if (cmd.startsWith("/"))
             cmd = cmd.substring(1);
-        cmd = cmd
-                .replace("%player%", player.getName())
+        cmd = cmd.replace("%player%", player.getName())
                 .replace("%uuid%", player.getUniqueId().toString());
         String mode = (run == null || run.isBlank()) ? "player" : run.toLowerCase();
         switch (mode) {
