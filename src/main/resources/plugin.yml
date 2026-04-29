@@ -57,7 +57,9 @@ commands:
     usage: /lookup <NAME>
   menu:
     description: 打开菜单
-    usage: /menu
+    usage: |
+      /menu
+      /menu reload
   excavate:
     description: 给当前物品添加批量挖掘
     usage: |
