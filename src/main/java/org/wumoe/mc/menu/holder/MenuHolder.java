@@ -22,6 +22,6 @@ public class MenuHolder implements InventoryHolder {
 
     @Override
     public @NonNull Inventory getInventory() {
-        return inventory;
+        return this.inventory;
     }
 }
