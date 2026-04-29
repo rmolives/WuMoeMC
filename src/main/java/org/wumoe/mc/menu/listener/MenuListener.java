@@ -30,19 +30,10 @@ public class MenuListener implements Listener {
         MenuHolder holder = (MenuHolder) e.getInventory().getHolder();
         if (holder == null) return;
         String menuName = holder.getMenuName();
-        String cmd = manager.getCommand(menuName, slot);
-        String run = manager.getRunType(menuName, slot);
+        String cmd = this.manager.getCommand(menuName, slot);
+        String run = this.manager.getRunType(menuName, slot);
         if (cmd == null || cmd.isBlank()) return;
         cmd = cmd.trim();
-        if (cmd.equalsIgnoreCase("close")) {
-            player.closeInventory();
-            return;
-        }
-        if (cmd.equalsIgnoreCase("refresh")) {
-            player.closeInventory();
-            manager.open(player, menuName);
-            return;
-        }
         if (cmd.toLowerCase().startsWith("menu:")) {
             String target = cmd.substring(5).trim();
             if (target.isEmpty()) {
@@ -50,7 +41,7 @@ public class MenuListener implements Listener {
                 return;
             }
             player.closeInventory();
-            manager.open(player, target);
+            this.manager.open(player, target);
             return;
         }
         player.closeInventory();
