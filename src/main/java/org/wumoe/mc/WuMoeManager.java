@@ -1,6 +1,5 @@
 package org.wumoe.mc;
 
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.wumoe.mc.auth.AuthManager;
 import org.wumoe.mc.ban.BanManager;
@@ -11,6 +10,7 @@ import org.wumoe.mc.death.DeathManager;
 import org.wumoe.mc.home.HomeManager;
 import org.wumoe.mc.tp.TpManager;
 import org.wumoe.mc.utils.PropertiesUtil;
+import org.wumoe.mc.utils.YamlUtil;
 
 import java.io.File;
 
@@ -37,7 +37,7 @@ public class WuMoeManager {
         this.playerManager = new PlayerManager(new PropertiesUtil(plugin.getDataFolder() + "/player.properties"));
         this.tpManager = new TpManager(this.playerManager, plugin);
         this.banManager = new BanManager(new PropertiesUtil(plugin.getDataFolder() + "/bans.properties"), this.playerManager);
-        this.menuManager = new MenuManager(YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder() + "/menu.yaml")));
+        this.menuManager = new MenuManager(new YamlUtil(new File(plugin.getDataFolder() + "/menu.yaml")));
         this.excavateManager = new ExcavateManager(this.plugin);
     }
 }
