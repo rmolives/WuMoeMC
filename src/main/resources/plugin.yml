@@ -16,6 +16,9 @@ commands:
   tpdeny:
     description: 拒绝传送
     usage: /tpdeny
+  rtp:
+    description: 随机传送
+    usage: /rtp
   back:
     description: 回到死亡地点
     usage: /back

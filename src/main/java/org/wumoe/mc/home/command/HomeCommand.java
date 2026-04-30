@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jspecify.annotations.NonNull;
 import org.wumoe.mc.home.HomeManager;
+import org.wumoe.mc.utils.TpUtil;
 
 public class HomeCommand implements CommandExecutor {
     private final HomeManager manager;
@@ -32,7 +33,7 @@ public class HomeCommand implements CommandExecutor {
             player.sendMessage(Component.text("Home数据损坏！", NamedTextColor.RED));
             return true;
         }
-        player.teleport(home);
+        TpUtil.tp(this.manager.plugin, player, home);
         player.sendMessage(Component.text("已传送回家！", NamedTextColor.GREEN));
         return true;
     }

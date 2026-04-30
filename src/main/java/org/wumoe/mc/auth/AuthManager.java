@@ -16,7 +16,7 @@ import java.util.*;
 
 public class AuthManager {
     private final PropertiesUtil config;
-    private final JavaPlugin plugin;
+    public final JavaPlugin plugin;
     private final Set<UUID> loggedIn = new HashSet<>();
     private final Map<UUID, BukkitTask> kickTasks = new HashMap<>();
     private final Map<UUID, BukkitTask> titleTasks = new HashMap<>();

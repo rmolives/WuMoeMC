@@ -4,14 +4,17 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.wumoe.mc.utils.PropertiesUtil;
 
 import java.util.UUID;
 
 public class DeathManager {
     private final PropertiesUtil config;
+    public final JavaPlugin plugin;
 
-    public DeathManager(PropertiesUtil config) {
+    public DeathManager(JavaPlugin plugin, PropertiesUtil config) {
+        this.plugin = plugin;
         this.config = config;
     }
 

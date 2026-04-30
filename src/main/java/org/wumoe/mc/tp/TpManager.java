@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.wumoe.mc.player.PlayerManager;
+import org.wumoe.mc.utils.TpUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +14,7 @@ import java.util.UUID;
 
 public class TpManager {
     private final Map<UUID, TpRequest> requests = new HashMap<>();
-    private final JavaPlugin plugin;
+    public final JavaPlugin plugin;
     public final PlayerManager player;
 
     private final long expireTime = 30 * 1000L;
@@ -25,7 +26,7 @@ public class TpManager {
 
     public void sendRequest(Player from, Player to, TpRequest.Type type) {
         UUID toId = to.getUniqueId();
-        requests.put(toId, new TpRequest(from.getUniqueId(), toId, type));
+        this.requests.put(toId, new TpRequest(from.getUniqueId(), toId, type));
         to.sendMessage(Component.text(from.getName(), NamedTextColor.GREEN)
                 .append(Component.text(" 请求", NamedTextColor.GREEN))
                 .append(Component.text(
@@ -33,9 +34,9 @@ public class TpManager {
                         NamedTextColor.WHITE)));
         to.sendMessage(Component.text("输入 /tpaccept 或 /tpdeny", NamedTextColor.YELLOW));
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
-            TpRequest req = requests.get(toId);
-            if (req != null && System.currentTimeMillis() - req.time >= expireTime) {
-                requests.remove(toId);
+            TpRequest req = this.requests.get(toId);
+            if (req != null && System.currentTimeMillis() - req.time >= this.expireTime) {
+                this.requests.remove(toId);
                 Player target = Bukkit.getPlayer(toId);
                 if (target != null)
                     target.sendMessage(Component.text("TPA请求已过期", NamedTextColor.RED));
@@ -44,7 +45,7 @@ public class TpManager {
     }
 
     public void accept(Player target) {
-        TpRequest req = requests.remove(target.getUniqueId());
+        TpRequest req = this.requests.remove(target.getUniqueId());
         if (req == null) {
             target.sendMessage(Component.text("没有待处理请求", NamedTextColor.RED));
             return;
@@ -55,15 +56,15 @@ public class TpManager {
             return;
         }
         if (req.type == TpRequest.Type.TPA)
-            from.teleport(target.getLocation());
+            TpUtil.tp(this.plugin, from, target.getLocation());
         else
-            target.teleport(from.getLocation());
+            TpUtil.tp(this.plugin, target, from.getLocation());
         from.sendMessage(Component.text("TP成功", NamedTextColor.GREEN));
         target.sendMessage(Component.text("已接受请求", NamedTextColor.GREEN));
     }
 
     public void deny(Player target) {
-        TpRequest req = requests.remove(target.getUniqueId());
+        TpRequest req = this.requests.remove(target.getUniqueId());
         if (req == null) {
             target.sendMessage(Component.text("没有待处理请求", NamedTextColor.RED));
             return;

@@ -26,10 +26,7 @@ import org.wumoe.mc.home.command.DelHomeCommand;
 import org.wumoe.mc.home.command.HomeCommand;
 import org.wumoe.mc.home.command.SetHomeCommand;
 import org.wumoe.mc.player.command.LookupCommand;
-import org.wumoe.mc.tp.command.TpAcceptCommand;
-import org.wumoe.mc.tp.command.TpaCommand;
-import org.wumoe.mc.tp.command.TpDenyCommand;
-import org.wumoe.mc.tp.command.TpahereCommand;
+import org.wumoe.mc.tp.command.*;
 
 import java.util.Objects;
 
@@ -39,6 +36,8 @@ public final class WuMoePlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         this.manager = new WuMoeManager(this);
+        /*-----------------------------------------------*/
+        register("rtp", new RtpCommand(this.manager.rtpManager));
         /*-----------------------------------------------*/
         register("menu", new MenuCommand(this.manager.menuManager));
         getServer().getPluginManager().registerEvents(new MenuListener(this.manager.menuManager), this);

@@ -8,6 +8,7 @@ import org.wumoe.mc.menu.MenuManager;
 import org.wumoe.mc.player.PlayerManager;
 import org.wumoe.mc.death.DeathManager;
 import org.wumoe.mc.home.HomeManager;
+import org.wumoe.mc.tp.RtpManager;
 import org.wumoe.mc.tp.TpManager;
 import org.wumoe.mc.utils.PropertiesUtil;
 import org.wumoe.mc.utils.YamlUtil;
@@ -17,6 +18,7 @@ import java.io.File;
 public class WuMoeManager {
     public JavaPlugin plugin;
     public TpManager tpManager;
+    public RtpManager rtpManager;
     public DeathManager deathManager;
     public HomeManager homeManager;
     public AuthManager authManager;
@@ -31,13 +33,14 @@ public class WuMoeManager {
     }
 
     private void load() {
-        this.deathManager = new DeathManager(new PropertiesUtil(plugin.getDataFolder() + "/death.properties"));
-        this.homeManager = new HomeManager(new PropertiesUtil(plugin.getDataFolder() + "/homes.properties"));
+        this.deathManager = new DeathManager(this.plugin, new PropertiesUtil(plugin.getDataFolder() + "/death.properties"));
+        this.homeManager = new HomeManager(this.plugin, new PropertiesUtil(plugin.getDataFolder() + "/homes.properties"));
         this.authManager = new AuthManager(new PropertiesUtil(plugin.getDataFolder() + "/auth.properties"), plugin);
         this.playerManager = new PlayerManager(new PropertiesUtil(plugin.getDataFolder() + "/player.properties"));
         this.tpManager = new TpManager(this.playerManager, plugin);
         this.banManager = new BanManager(new PropertiesUtil(plugin.getDataFolder() + "/bans.properties"), this.playerManager);
         this.menuManager = new MenuManager(new YamlUtil(new File(plugin.getDataFolder() + "/menu.yaml")));
+        this.rtpManager = new RtpManager(plugin);
         this.excavateManager = new ExcavateManager(this.plugin);
     }
 }
