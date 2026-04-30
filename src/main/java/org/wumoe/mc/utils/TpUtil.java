@@ -15,7 +15,7 @@ public class TpUtil {
     public static void tp(JavaPlugin plugin, Player player, Location target) {
         World world = player.getWorld();
         List<LivingEntity> leashed = new ArrayList<>();
-        for (Entity entity : world.getNearbyEntities(player.getLocation(), 16, 16, 16)) {
+        for (Entity entity : world.getNearbyEntities(player.getLocation(), 10, 10, 10)) {
             if (!(entity instanceof LivingEntity living)) continue;
             if (!living.isLeashed()) continue;
             if (living.getLeashHolder() instanceof Player holder
