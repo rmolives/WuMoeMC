@@ -18,16 +18,16 @@ public class MenuListener implements Listener {
     }
 
     @EventHandler
-    public void onClick(InventoryClickEvent e) {
-        if (!isMenu(e)) return;
-        e.setCancelled(true);
-        if (e.isShiftClick()) return;
-        if (e.getClick() == ClickType.NUMBER_KEY) return;
-        if (e.getClickedInventory() == null) return;
-        if (e.getClickedInventory() != e.getView().getTopInventory()) return;
-        if (!(e.getWhoClicked() instanceof Player player)) return;
-        int slot = e.getRawSlot();
-        MenuHolder holder = (MenuHolder) e.getInventory().getHolder();
+    public void onClick(InventoryClickEvent event) {
+        if (!isMenu(event)) return;
+        event.setCancelled(true);
+        if (event.isShiftClick()) return;
+        if (event.getClick() == ClickType.NUMBER_KEY) return;
+        if (event.getClickedInventory() == null) return;
+        if (event.getClickedInventory() != event.getView().getTopInventory()) return;
+        if (!(event.getWhoClicked() instanceof Player player)) return;
+        int slot = event.getRawSlot();
+        MenuHolder holder = (MenuHolder) event.getInventory().getHolder();
         if (holder == null) return;
         String menuName = holder.getMenuName();
         String cmd = this.manager.getCommand(menuName, slot);
@@ -66,30 +66,30 @@ public class MenuListener implements Listener {
     }
 
     @EventHandler
-    public void onDrag(InventoryDragEvent e) {
-        if (!isMenu(e)) return;
-        for (int slot : e.getRawSlots()) {
-            if (slot < e.getView().getTopInventory().getSize()) {
-                e.setCancelled(true);
+    public void onDrag(InventoryDragEvent event) {
+        if (!isMenu(event)) return;
+        for (int slot : event.getRawSlots()) {
+            if (slot < event.getView().getTopInventory().getSize()) {
+                event.setCancelled(true);
                 return;
             }
         }
     }
 
     @EventHandler
-    public void onDrop(PlayerDropItemEvent e) {
-        if (!isMenu(e.getPlayer().getOpenInventory())) return;
-        e.setCancelled(true);
+    public void onDrop(PlayerDropItemEvent event) {
+        if (!isMenu(event.getPlayer().getOpenInventory())) return;
+        event.setCancelled(true);
     }
 
     @EventHandler
-    public void onClose(InventoryCloseEvent e) {
-        if (!isMenu(e)) return;
-        e.getPlayer().setItemOnCursor(null);
+    public void onClose(InventoryCloseEvent event) {
+        if (!isMenu(event)) return;
+        event.getPlayer().setItemOnCursor(null);
     }
 
-    private boolean isMenu(InventoryEvent e) {
-        return e.getInventory().getHolder() instanceof MenuHolder;
+    private boolean isMenu(InventoryEvent event) {
+        return event.getInventory().getHolder() instanceof MenuHolder;
     }
 
     private boolean isMenu(org.bukkit.inventory.InventoryView view) {

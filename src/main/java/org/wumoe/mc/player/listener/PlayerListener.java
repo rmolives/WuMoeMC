@@ -14,12 +14,12 @@ public class PlayerListener implements Listener {
     }
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent e) {
-        this.manager.update(e.getPlayer());
+    public void onJoin(PlayerJoinEvent event) {
+        this.manager.update(event.getPlayer());
     }
 
     @EventHandler
-    public void onQuit(PlayerQuitEvent e) {
-        this.manager.onQuit(e.getPlayer());
+    public void onQuit(PlayerQuitEvent event) {
+        this.manager.onQuit(event.getPlayer());
     }
 }

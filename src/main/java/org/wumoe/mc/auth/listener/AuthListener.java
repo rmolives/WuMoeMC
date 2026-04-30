@@ -35,8 +35,8 @@ public class AuthListener implements Listener {
 
     @EventHandler
     public void onMove(PlayerMoveEvent event) {
-        Player p = event.getPlayer();
-        if (this.manager.isLoggedIn(p)) return;
+        Player player = event.getPlayer();
+        if (this.manager.isLoggedIn(player)) return;
         if (event.getFrom().getX() != event.getTo().getX()
                 || event.getFrom().getY() != event.getTo().getY()
                 || event.getFrom().getZ() != event.getTo().getZ()) {
@@ -46,20 +46,20 @@ public class AuthListener implements Listener {
 
     @EventHandler
     public void onChat(AsyncChatEvent event) {
-        Player p = event.getPlayer();
-        if (this.manager.isLoggedIn(p)) return;
+        Player player = event.getPlayer();
+        if (this.manager.isLoggedIn(player)) return;
         event.setCancelled(true);
-        msg(p);
+        msg(player);
     }
 
     @EventHandler
     public void onCommand(PlayerCommandPreprocessEvent event) {
-        Player p = event.getPlayer();
-        if (this.manager.isLoggedIn(p)) return;
+        Player player = event.getPlayer();
+        if (this.manager.isLoggedIn(player)) return;
         String msg = event.getMessage().toLowerCase();
         if (msg.startsWith("/login") || msg.startsWith("/register")) return;
         event.setCancelled(true);
-        msg(p);
+        msg(player);
     }
 
     @EventHandler
@@ -78,29 +78,29 @@ public class AuthListener implements Listener {
 
     @EventHandler
     public void onBreak(BlockBreakEvent event) {
-        Player p = event.getPlayer();
-        if (this.manager.isLoggedIn(p)) return;
+        Player player = event.getPlayer();
+        if (this.manager.isLoggedIn(player)) return;
         event.setCancelled(true);
     }
 
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
-        Player p = event.getPlayer();
-        if (this.manager.isLoggedIn(p)) return;
+        Player player = event.getPlayer();
+        if (this.manager.isLoggedIn(player)) return;
         event.setCancelled(true);
     }
 
     @EventHandler
     public void onPlace(BlockPlaceEvent event) {
-        Player p = event.getPlayer();
-        if (this.manager.isLoggedIn(p)) return;
+        Player player = event.getPlayer();
+        if (this.manager.isLoggedIn(player)) return;
         event.setCancelled(true);
     }
 
     @EventHandler
     public void onDrop(PlayerDropItemEvent event) {
-        Player p = event.getPlayer();
-        if (this.manager.isLoggedIn(p)) return;
+        Player player = event.getPlayer();
+        if (this.manager.isLoggedIn(player)) return;
         event.setCancelled(true);
     }
 

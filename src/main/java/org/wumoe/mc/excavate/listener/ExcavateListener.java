@@ -20,11 +20,11 @@ public class ExcavateListener implements Listener {
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onBreak(BlockBreakEvent e) {
-        Player player = e.getPlayer();
+    public void onBreak(BlockBreakEvent event) {
+        Player player = event.getPlayer();
         ItemStack tool = player.getInventory().getItemInMainHand();
         if (!this.manager.has(tool)) return;
-        Block origin = e.getBlock();
+        Block origin = event.getBlock();
         Vector dir = player.getEyeLocation().getDirection().normalize();
         int dx = Math.abs(dir.getX()) > Math.abs(dir.getZ()) ? (dir.getX() > 0 ? 1 : -1) : 0;
         int dz = dx == 0 ? (dir.getZ() > 0 ? 1 : -1) : 0;
