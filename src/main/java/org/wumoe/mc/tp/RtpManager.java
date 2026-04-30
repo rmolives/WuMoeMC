@@ -1,7 +1,6 @@
 package org.wumoe.mc.tp;
 
 import org.bukkit.*;
-import org.bukkit.block.Biome;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.wumoe.mc.utils.TpUtil;
 
