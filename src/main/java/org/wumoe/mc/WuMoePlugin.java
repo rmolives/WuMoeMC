@@ -37,8 +37,6 @@ public final class WuMoePlugin extends JavaPlugin {
     public void onEnable() {
         this.manager = new WuMoeManager(this);
         /*-----------------------------------------------*/
-        register("rtp", new RtpCommand(this.manager.rtpManager));
-        /*-----------------------------------------------*/
         register("menu", new MenuCommand(this.manager.menuManager));
         getServer().getPluginManager().registerEvents(new MenuListener(this.manager.menuManager), this);
         /*-----------------------------------------------*/

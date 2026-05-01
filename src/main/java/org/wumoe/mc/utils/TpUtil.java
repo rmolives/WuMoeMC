@@ -2,9 +2,7 @@ package org.wumoe.mc.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -14,39 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TpUtil {
-    public static boolean isSafe(World world, int x, int y, int z) {
-        Block ground = world.getBlockAt(x, y, z);
-        Block feet = world.getBlockAt(x, y + 1, z);
-        Block head = world.getBlockAt(x, y + 2, z);
-        Material g = ground.getType();
-        if (g == Material.LAVA || g == Material.WATER) return false;
-        if (g.name().contains("MAGMA")) return false;
-        if (g.name().contains("CACTUS")) return false;
-        if (g.name().contains("FIRE")) return false;
-        if (g.name().contains("LEAVES")) return false;
-        if (!g.isSolid()) return false;
-        if (!feet.isPassable() || !head.isPassable()) return false;
-        return !world.getBlockAt(x, y - 1, z).isEmpty();
-    }
-
-    public static Location findSafeSpot(World world, Location center, int radius) {
-        int baseX = center.getBlockX();
-        int baseZ = center.getBlockZ();
-        for (int r = 0; r <= radius; ++r) {
-            for (int dx = -r; dx <= r; ++dx) {
-                for (int dz = -r; dz <= r; ++dz) {
-                    if (Math.abs(dx) != r && Math.abs(dz) != r) continue;
-                    int x = baseX + dx;
-                    int z = baseZ + dz;
-                    int y = world.getHighestBlockYAt(x, z);
-                    if (isSafe(world, x, y, z))
-                        return new Location(world, x, y, z);
-                }
-            }
-        }
-        return null;
-    }
-
     public static void tp(JavaPlugin plugin, Player player, Location target) {
         World world = player.getWorld();
         List<LivingEntity> leashed = new ArrayList<>();

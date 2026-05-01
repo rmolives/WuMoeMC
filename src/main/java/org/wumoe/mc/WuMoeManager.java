@@ -8,7 +8,6 @@ import org.wumoe.mc.menu.MenuManager;
 import org.wumoe.mc.player.PlayerManager;
 import org.wumoe.mc.death.DeathManager;
 import org.wumoe.mc.home.HomeManager;
-import org.wumoe.mc.tp.RtpManager;
 import org.wumoe.mc.tp.TpManager;
 import org.wumoe.mc.utils.PropertiesUtil;
 import org.wumoe.mc.utils.YamlUtil;
@@ -18,7 +17,6 @@ import java.io.File;
 public class WuMoeManager {
     public JavaPlugin plugin;
     public TpManager tpManager;
-    public RtpManager rtpManager;
     public DeathManager deathManager;
     public HomeManager homeManager;
     public AuthManager authManager;
@@ -40,7 +38,6 @@ public class WuMoeManager {
         this.tpManager = new TpManager(this.playerManager, plugin);
         this.banManager = new BanManager(new PropertiesUtil(plugin.getDataFolder() + "/bans.properties"), this.playerManager);
         this.menuManager = new MenuManager(new YamlUtil(new File(plugin.getDataFolder() + "/menu.yaml")));
-        this.rtpManager = new RtpManager(plugin);
         this.excavateManager = new ExcavateManager(this.plugin);
     }
 }
