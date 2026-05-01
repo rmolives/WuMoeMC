@@ -12,7 +12,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class TpUtil {
     public static boolean isSafe(World world, int x, int y, int z) {
@@ -41,7 +40,7 @@ public class TpUtil {
                     int z = baseZ + dz;
                     int y = world.getHighestBlockYAt(x, z);
                     if (isSafe(world, x, y, z))
-                        return new Location(world, x + 0.5, y + 1, z + 0.5);
+                        return new Location(world, x, y, z);
                 }
             }
         }
@@ -60,13 +59,8 @@ public class TpUtil {
         }
         for (LivingEntity living : leashed)
             living.setLeashHolder(null);
-        int i = 0;
-        for (LivingEntity living : leashed) {
-            Location base = target.clone().add((i % 3) - 1, 0, (i / 3) - 1);
-            Location safe = findSafeSpot(target.getWorld(), base, 6);
-            living.teleport(Objects.requireNonNullElseGet(safe, () -> target.clone().add(0, 1, 0)));
-            ++i;
-        }
+        for (LivingEntity living : leashed)
+            living.teleport(target.clone());
         player.teleport(target);
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
             for (LivingEntity living : leashed) {
