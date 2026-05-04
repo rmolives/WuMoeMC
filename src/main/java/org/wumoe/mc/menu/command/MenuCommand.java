@@ -16,7 +16,7 @@ public class MenuCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NonNull CommandSender sender, @NonNull Command cmd, @NonNull String label, String @NonNull [] args) {
-        if (args.length > 0) {
+        if (args.length == 1) {
             if ("reload".equals(args[0])) {
                 this.manager.reload();
                 sender.sendMessage(Component.text("已刷新菜单", NamedTextColor.GREEN));
@@ -24,6 +24,8 @@ public class MenuCommand implements CommandExecutor {
             }
             return false;
         }
+        if (args.length != 0)
+            return false;
         if (!(sender instanceof Player player)) {
             sender.sendMessage(Component.text("只有玩家可以使用", NamedTextColor.RED));
             return true;

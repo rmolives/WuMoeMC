@@ -21,7 +21,7 @@ public class ExcavateCommand implements CommandExecutor {
             sender.sendMessage(Component.text("只有玩家可以使用", NamedTextColor.RED));
             return true;
         }
-        if (args.length == 0) return false;
+        if (args.length != 1) return false;
         ItemStack item = player.getInventory().getItemInMainHand();
         if (item.getType().isAir()) {
             player.sendMessage(Component.text("手上没有物品", NamedTextColor.RED));

@@ -14,7 +14,7 @@ public class ChunkLoadCommand implements CommandExecutor {
             sender.sendMessage(Component.text("只有玩家可以使用", NamedTextColor.RED));
             return true;
         }
-        if (args.length == 0) return false;
+        if (args.length != 1) return false;
         Chunk chunk = player.getLocation().getChunk();
         switch (args[0].toLowerCase()) {
             case "on" -> {
