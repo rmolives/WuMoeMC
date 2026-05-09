@@ -71,3 +71,15 @@ commands:
       /chunkload on
       /chunkload off
       /chunkload check
+  setwarp:
+    description: 设置传送点
+    usage: /setwarp <name>
+  warp:
+    description: 传送传送点
+    usage: /warp <name>
+  delwarp:
+    description: 删除传送点
+    usage: /delwarp <name>
+  warps:
+    description: 传送点列表
+    usage: /warps

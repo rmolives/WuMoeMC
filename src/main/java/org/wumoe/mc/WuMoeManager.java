@@ -11,6 +11,7 @@ import org.wumoe.mc.home.HomeManager;
 import org.wumoe.mc.tp.TpManager;
 import org.wumoe.mc.utils.PropertiesUtil;
 import org.wumoe.mc.utils.YamlUtil;
+import org.wumoe.mc.wrap.WarpManager;
 
 import java.io.File;
 
@@ -24,6 +25,7 @@ public class WuMoeManager {
     public PlayerManager playerManager;
     public MenuManager menuManager;
     public ExcavateManager excavateManager;
+    public WarpManager warpManager;
 
     public WuMoeManager(JavaPlugin plugin) {
         this.plugin = plugin;
@@ -39,5 +41,6 @@ public class WuMoeManager {
         this.banManager = new BanManager(new PropertiesUtil(plugin.getDataFolder() + "/bans.properties"), this.playerManager);
         this.menuManager = new MenuManager(new YamlUtil(new File(plugin.getDataFolder() + "/menu.yaml")));
         this.excavateManager = new ExcavateManager(this.plugin);
+        this.warpManager = new WarpManager(new PropertiesUtil(plugin.getDataFolder() + "/wraps.properties"));
     }
 }

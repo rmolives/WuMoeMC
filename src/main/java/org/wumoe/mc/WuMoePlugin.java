@@ -27,6 +27,10 @@ import org.wumoe.mc.home.command.HomeCommand;
 import org.wumoe.mc.home.command.SetHomeCommand;
 import org.wumoe.mc.player.command.LookupCommand;
 import org.wumoe.mc.tp.command.*;
+import org.wumoe.mc.wrap.command.DelWarpCommand;
+import org.wumoe.mc.wrap.command.SetWarpCommand;
+import org.wumoe.mc.wrap.command.WarpCommand;
+import org.wumoe.mc.wrap.command.WarpsCommand;
 
 import java.util.Objects;
 
@@ -36,6 +40,11 @@ public final class WuMoePlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         this.manager = new WuMoeManager(this);
+        /*-----------------------------------------------*/
+        register("warp", new WarpCommand(this.manager.warpManager));
+        register("delwarp", new DelWarpCommand(this.manager.warpManager));
+        register("setwarp", new SetWarpCommand(this.manager.warpManager));
+        register("warps", new WarpsCommand(this.manager.warpManager));
         /*-----------------------------------------------*/
         register("menu", new MenuCommand(this.manager.menuManager));
         getServer().getPluginManager().registerEvents(new MenuListener(this.manager.menuManager), this);
